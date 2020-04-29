@@ -11,6 +11,12 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    var asYYYYMMDD: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
+    }
+    
     private static let iso8601Formatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
         return formatter
