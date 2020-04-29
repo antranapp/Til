@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "ShellOut",
+        "repositoryURL": "https://github.com/JohnSundell/ShellOut",
+        "state": {
+          "branch": null,
+          "revision": "e1577acf2b6e90086d01a6d5e2b8efdaae033568",
+          "version": "2.3.0"
+        }
+      },
+      {
         "package": "swift-argument-parser",
         "repositoryURL": "https://github.com/apple/swift-argument-parser",
         "state": {
@@ -29,21 +38,12 @@
         }
       },
       {
-        "package": "llbuild",
-        "repositoryURL": "https://github.com/apple/swift-llbuild.git",
+        "package": "Yams",
+        "repositoryURL": "https://github.com/jpsim/Yams.git",
         "state": {
           "branch": null,
-          "revision": "f73b84bc1525998e5e267f9d830c1411487ac65e",
-          "version": "0.2.0"
-        }
-      },
-      {
-        "package": "SwiftPM",
-        "repositoryURL": "https://github.com/apple/swift-package-manager",
-        "state": {
-          "branch": null,
-          "revision": "9abcc2260438177cecd7cf5185b144d13e74122b",
-          "version": "0.5.0"
+          "revision": "53741ba55ecca5c7149d8c9f810913ec80845c69",
+          "version": "3.0.0"
         }
       }
     ]
