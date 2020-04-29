@@ -12,7 +12,15 @@ struct SettingsManager {
         static let settingFilename = "Til.yml"
         
         struct DefaultSettings {
+            static let root = "."
             static let editor = "code"
+            
+            static func makeDefaultSetting() -> Setting {
+                return Setting(
+                    root: Constants.DefaultSettings.editor,
+                    editor: Constants.DefaultSettings.editor
+                )
+            }
         }
         
     }
@@ -41,16 +49,12 @@ struct SettingsManager {
         if let settingString = settingString {
             setting = try decodeSetting(from: settingString)
         } else {
-            setting = makeDefaultSetting()
+            setting = Constants.DefaultSettings.makeDefaultSetting()
         }
     }
     
     private func decodeSetting(from string: String) throws -> Setting {
         let decoder = YAMLDecoder()
         return try decoder.decode(from: string)
-    }
-    
-    private func makeDefaultSetting() -> Setting {
-        return Setting(editor: Constants.DefaultSettings.editor)
     }
 }

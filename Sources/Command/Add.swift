@@ -23,8 +23,11 @@ struct Add: ParsableCommand {
     @Argument(help: "The `title` of the entry, this is also the filename of the MarkDown file.")
     private var title: String
     
-    @Option(name: .shortAndLong, default: SettingsManager.Constants.DefaultSettings.editor, help: "Optional command to launch a specific editor for MarkDown editing.")
-    private var editor: String
+    @Option(name: .shortAndLong, default: nil, help: "Optional command to launch a specific editor for MarkDown editing.")
+    private var editor: String?
+    
+    @Option(name: .shortAndLong, default: SettingsManager.Constants.DefaultSettings.root, help: "Root folder of the content")
+    private var root: String
     
     // Private
 
@@ -34,7 +37,7 @@ struct Add: ParsableCommand {
     }
     
     private var rootFolder: Folder {
-        return try! Folder(path: ".")
+        return try! Folder(path: root)
     }
     
     // MARK: - APIs
@@ -60,7 +63,7 @@ struct Add: ParsableCommand {
     
     /// Open a file at `path`using an editor.
     private func openEditor(file: File) throws {
-        try shellOut(to: "\(settingsManager.setting.editor) \(file.path)")
+        try shellOut(to: "\(editor ?? settingsManager.setting.editor) \(file.path)")
     }
     
     /// Create default YAML-formatted header for the markdown file.
