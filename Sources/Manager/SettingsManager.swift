@@ -12,7 +12,7 @@ struct SettingsManager {
         static let settingFilename = "Til.yml"
         
         struct DefaultSettings {
-            static let root = "."
+            static let rootContentFolder = "."
             static let editor = "code"
             
             static func makeDefaultSetting() -> Setting {
@@ -35,8 +35,8 @@ struct SettingsManager {
     
     // MARK: Initialization
     
-    init(rootFolder: Folder) throws {
-        self.rootFolder = rootFolder
+    init() throws {
+        self.rootFolder = try Folder(path: ".")
         try load()
     }
     

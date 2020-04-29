@@ -8,6 +8,6 @@ struct Til: ParsableCommand {
     
     static let configuration = CommandConfiguration(
         abstract: "A Swift command-line tool to manage a Today-I-Learned repository",
-        subcommands: [Add.self]
+        subcommands: [Add.self, GenerateReadme.self]
     )
 }

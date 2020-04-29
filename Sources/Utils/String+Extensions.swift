@@ -22,4 +22,6 @@ extension String {
     var asData: Data? {
         return self.data(using: .utf8)
     }
+    
+    static var newLine: String = "\n"
 }

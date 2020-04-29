@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "MarkdownGenerator",
+        "repositoryURL": "https://github.com/eneko/MarkdownGenerator",
+        "state": {
+          "branch": "master",
+          "revision": "48e8a60b40f71b3b14aad92f1791bfed4a5241c2",
+          "version": null
+        }
+      },
+      {
         "package": "ShellOut",
         "repositoryURL": "https://github.com/JohnSundell/ShellOut",
         "state": {

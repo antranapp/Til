@@ -7,6 +7,9 @@ import ArgumentParser
 import ShellOut
 import Files
 
+/// A command to genreate a summary `README.md` based on the content in a `RootFolder`
+///
+/// Command: Til add <topic> <title> [--editor editorProgram] [-- root rootFolder]
 struct Add: ParsableCommand {
     
     // MARK: - Properties
@@ -17,8 +20,8 @@ struct Add: ParsableCommand {
         abstract: "Add a new Today-I-Learned entry using a default MarkDown editor."
     )
 
-    @Argument(help: "The `category` of the entry, this is also the folder name.")
-    private var category: String
+    @Argument(help: "The `topic` of the entry, this is also the folder name.")
+    private var topic: String
     
     @Argument(help: "The `title` of the entry, this is also the filename of the MarkDown file.")
     private var title: String
@@ -26,24 +29,24 @@ struct Add: ParsableCommand {
     @Option(name: .shortAndLong, default: nil, help: "Optional command to launch a specific editor for MarkDown editing.")
     private var editor: String?
     
-    @Option(name: .shortAndLong, default: SettingsManager.Constants.DefaultSettings.root, help: "Root folder of the content")
-    private var root: String
+    @Option(name: .shortAndLong, default: nil, help: "Root folder of the content")
+    private var root: String?
     
     // Private
 
     private var settingsManager: SettingsManager {
-        let settingManager = try! SettingsManager(rootFolder: self.rootFolder)
+        let settingManager = try! SettingsManager()
         return settingManager
     }
     
-    private var rootFolder: Folder {
-        return try! Folder(path: root)
+    private var rootContentFolder: Folder {
+        return try! Folder(path: rootContentPath)
     }
     
     // MARK: - APIs
     
     func run() throws {
-        let file = try createFile(category: category, title: title, date: Date())
+        let file = try createFile(topic: topic, title: title, date: Date())
         try openEditor(file: file)
     }
     
@@ -51,14 +54,14 @@ struct Add: ParsableCommand {
     
     // TODO: Move all commands to a static extension of ShellOutCommand.
     
-    /// Create a file with `title` as file name in folder `category`.
-    private func createFile(category: String, title: String, date: Date) throws -> File {
+    /// Create a file with `title` as file name in folder `topic`.
+    private func createFile(topic: String, title: String, date: Date) throws -> File {
         let filename = "\(date.asYYYYMMDD)_\(title.lowercased().asQualifiedMarkdownFilename)"
-        let categoryFolder =  try createCategory(category: category.lowercased())
-        if categoryFolder.containsFile(named: filename) {
-            return try categoryFolder.file(named: filename)
+        let topicFolder =  try createTopic(topic: topic.lowercased())
+        if topicFolder.containsFile(named: filename) {
+            return try topicFolder.file(named: filename)
         }
-        return try categoryFolder.createFile(named: filename, contents: makeHeader(title: title, date: date))
+        return try topicFolder.createFile(named: filename, contents: makeHeader(title: title, date: date))
     }
     
     /// Open a file at `path`using an editor.
@@ -70,6 +73,7 @@ struct Add: ParsableCommand {
     private func makeHeader(title: String, date: Date) -> Data? {
         return """
         ---
+        title: \(title)
         createdAt: \(date.asISO8601DateString)
         ---
         
@@ -77,12 +81,16 @@ struct Add: ParsableCommand {
         """.asData
     }
     
-    /// Create a folder for a category if needed.
-    private func createCategory(category: String) throws -> Folder {
-        guard !rootFolder.containsSubfolder(named: category) else {
-            return try rootFolder.subfolder(named: category)
+    /// Create a folder for a topic if needed.
+    private func createTopic(topic: String) throws -> Folder {
+        guard !rootContentFolder.containsSubfolder(named: topic) else {
+            return try rootContentFolder.subfolder(named: topic)
         }
 
-        return try rootFolder.createSubfolder(named: category)
+        return try rootContentFolder.createSubfolder(named: topic)
+    }
+    
+    private var rootContentPath: String {
+        return root ?? settingsManager.setting.root
     }
 }
