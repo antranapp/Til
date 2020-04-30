@@ -17,15 +17,19 @@ extension String {
     
     /// Remove excessive whitespaces in `self`.
     var withCondensedWhitespace: String {
-        return self.replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
+        self.replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
     }
     
     var asData: Data? {
-        return self.data(using: .utf8)
+        self.data(using: .utf8)
     }
     
     func x(_ times:Int) -> String {
-        return String(repeating: self, count: times)
+        String(repeating: self, count: times)
+    }
+    
+    var trimmed: String {
+        self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
     static var newLine: String = "\n"

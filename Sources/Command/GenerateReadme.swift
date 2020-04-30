@@ -36,7 +36,7 @@ struct GenerateReadme: ParsableCommand {
         let service = try ReadmeGenerationService(rootFolder: rootContentFolder)
         let readmeFile = try service.generate()
         
-        print("REAMDE.md generated successfully at \(readmeFile.path)!".green())
+        print("[Info] REAMDE.md generated successfully at \(readmeFile.path)!".green())
     }
     
     // MARK: - Private Helpers

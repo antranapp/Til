@@ -34,17 +34,17 @@ class SettingsManager {
     
     static let shared = SettingsManager()
     
-    public var setting: Setting!
+    public let rootFolder = try! Folder(path: ".")
     
-    // Private
+    public var setting: Setting!
 
-    private var rootFolder: Folder
+    public var rootContentFolder: Folder? {
+        return try? Folder(path: setting.root)
+    }
     
     // MARK: Initialization
     
     init() {
-        self.rootFolder = try! Folder(path: ".")
-        
         do {
             try load()
         } catch {

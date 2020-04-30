@@ -15,7 +15,8 @@ let package = Package(
         .package(url: "https://github.com/JohnSundell/Files", from: "4.1.1"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "3.0.0"),
         .package(url: "https://github.com/JohnSundell/ShellOut", from: "2.0.0"),
-        .package(url: "https://github.com/eneko/MarkdownGenerator", .branch("master"))
+        .package(url: "https://github.com/eneko/MarkdownGenerator", .branch("master")),
+        .package(url: "https://github.com/JohnSundell/Ink", from: "0.4.0")
     ],
     targets: [
         .target(
@@ -26,7 +27,8 @@ let package = Package(
                 "ColorizeSwift",
                 "Files",
                 "ShellOut",
-                "MarkdownGenerator"
+                "MarkdownGenerator",
+                "Ink"
             ],
             path: "."),
     ]

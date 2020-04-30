@@ -4,16 +4,16 @@
 
 import Foundation
 import MarkdownGenerator
+import Files
 
-/// A meta summary of a TIL.
-struct TILSummary {
-    let title: String
-    let createdAt: Date?
+/// A meta summary of a Til.
+struct TilSummary {
+    let tilEntry: TilEntry
 }
 
-extension TILSummary: MarkdownConvertible {
+extension TilSummary: MarkdownConvertible {
     var markdown: String {
-        return title + String.newLine
+        "\(tilEntry.meta.createdAt?.asYYYYMMDD ?? ""): \(tilEntry.meta.title)".trimmed
     }
 }
 
@@ -21,13 +21,23 @@ extension TILSummary: MarkdownConvertible {
 struct TopicSummary {
     let name: String
     let numberOfTIL: Int
-    let tils: [TILSummary]
+    let tils: [TilSummary]
 }
 
 extension TopicSummary: MarkdownConvertible {
     var markdown: String {
-        let listOfTILs = MarkdownList(items: tils.map { MarkdownLink(text: $0.title, url: "\(name)/\($0.title)") })
-        return MarkdownCollapsibleSection(summary: name, details: listOfTILs.markdown).markdown
+        let listOfTILs = MarkdownList(
+            items: tils.map {
+                MarkdownLink(
+                    text: $0.markdown,
+                    url: $0.tilEntry.file.path(
+                        relativeTo: SettingsManager.shared.rootContentFolder!
+                    )
+                )
+            }
+        )
+        let summary = "\(name) (\(tils.count))"
+        return MarkdownCollapsibleSection(summary: summary, details: listOfTILs.markdown).markdown
     }
 }
 
@@ -39,7 +49,6 @@ struct ContentSummary {
 }
 
 extension ContentSummary: MarkdownConvertible {
-    
     var markdown: String {
         let numberOfTILsString = "TILs: \(numberOfTILs)"
         let numberOfTopicsString = "Topics: \(numberOfTopics)"

@@ -5,6 +5,7 @@
 import Foundation
 import Files
 import MarkdownGenerator
+import Ink
 
 /// Service class to generate a `README.md` file based on the content inside a `rootFolder`.
 class ReadmeGenerationService {
@@ -46,24 +47,26 @@ class ReadmeGenerationService {
     // MARK: Private helpers
         
     private func makeContentSummary() -> ContentSummary {
+        let parser = MarkdownParser()
+        
         let numberOfTopics = rootFolder.subfolders.count()
-        let numberOfTILs = rootFolder.subfolders.reduce(0) { $0 + $1.files.count()}
+        let numberOfTils = rootFolder.subfolders.reduce(0) { $0 + $1.files.count()}
         
         let topics = rootFolder.subfolders.map {
             TopicSummary(
                 name: $0.name,
                 numberOfTIL: $0.files.count(),
-                tils: $0.files.map {
-                    TILSummary(
-                        title: $0.name, // TODO: read title of a TIL from file
-                        createdAt: $0.creationDate
-                    )
+                tils: $0.files.compactMap { file in
+                    guard let entry = TilEntry.fromFile(file, parser: parser) else {
+                        return nil
+                    }
+                    return TilSummary(tilEntry: entry)
                 }
             )
         }
         
         return ContentSummary(
-            numberOfTILs: numberOfTILs,
+            numberOfTILs: numberOfTils,
             numberOfTopics: numberOfTopics,
             topics: topics
         )
