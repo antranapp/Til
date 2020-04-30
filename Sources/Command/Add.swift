@@ -33,11 +33,6 @@ struct Add: ParsableCommand {
     private var root: String?
     
     // Private
-
-    private var settingsManager: SettingsManager {
-        let settingManager = SettingsManager()
-        return settingManager
-    }
     
     private var rootContentFolder: Folder {
         return try! Folder(path: rootContentPath)
@@ -52,8 +47,6 @@ struct Add: ParsableCommand {
     
     // MARK: - Private Helpers
     
-    // TODO: Move all commands to a static extension of ShellOutCommand.
-    
     /// Create a file with `title` as file name in folder `topic`.
     private func createFile(topic: String, title: String, date: Date) throws -> File {
         let filename = "\(date.asYYYYMMDD)_\(title.lowercased().asQualifiedMarkdownFilename)"
@@ -66,7 +59,7 @@ struct Add: ParsableCommand {
     
     /// Open a file at `path`using an editor.
     private func openEditor(file: File) throws {
-        try shellOut(to: "\(editor ?? settingsManager.setting.editor) \(file.path)")
+        try shellOut(to: "\(editorCommand) \(file.path)")
     }
     
     /// Create default YAML-formatted header for the markdown file.
@@ -91,6 +84,10 @@ struct Add: ParsableCommand {
     }
     
     private var rootContentPath: String {
-        return root ?? settingsManager.setting.root
+        return root ?? SettingsManager.shared.setting.root
+    }
+    
+    private var editorCommand: String {
+        return editor ?? SettingsManager.shared.setting.editor
     }
 }

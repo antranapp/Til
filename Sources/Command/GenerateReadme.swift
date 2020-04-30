@@ -25,11 +25,6 @@ struct GenerateReadme: ParsableCommand {
     private var root: String?
     
     // Private
-
-    private var settingsManager: SettingsManager {
-        let settingManager = SettingsManager()
-        return settingManager
-    }
     
     private var rootContentFolder: Folder {
         return try! Folder(path: rootContentPath)
@@ -47,6 +42,6 @@ struct GenerateReadme: ParsableCommand {
     // MARK: - Private Helpers
 
     private var rootContentPath: String {
-        return root ?? settingsManager.setting.root
+        return root ?? SettingsManager.shared.setting.root
     }
 }

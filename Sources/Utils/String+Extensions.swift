@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import MarkdownGenerator
 
 extension String {
     

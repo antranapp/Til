@@ -43,9 +43,9 @@ extension ContentSummary: MarkdownConvertible {
     var markdown: String {
         let numberOfTILsString = "TILs: \(numberOfTILs)"
         let numberOfTopicsString = "Topics: \(numberOfTopics)"
+        let summary = MarkdownList(items: [numberOfTopicsString, numberOfTILsString])
         return
-            numberOfTopicsString + String.newLine.x(2) +
-            numberOfTILsString + String.newLine.x(2) +
+            summary.markdown + String.newLine.x(2) +
             topics.markdown
     }
 }

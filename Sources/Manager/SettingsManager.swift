@@ -9,7 +9,7 @@ import ColorizeSwift
 // TODO: changed to SingleTon
 
 /// Managing the settings for the tool.
-struct SettingsManager {
+class SettingsManager {
     
     struct Constants {
         static let settingFilename = "Til.yml"
@@ -30,6 +30,10 @@ struct SettingsManager {
     
     // MARK: Properties
     
+    // Public
+    
+    static let shared = SettingsManager()
+    
     public var setting: Setting!
     
     // Private
@@ -40,6 +44,7 @@ struct SettingsManager {
     
     init() {
         self.rootFolder = try! Folder(path: ".")
+        
         do {
             try load()
         } catch {
@@ -50,7 +55,7 @@ struct SettingsManager {
     
     // MARK: Private helpers
     
-    private mutating func load() throws {
+    private func load() throws {
         let file = try rootFolder.file(named: Constants.settingFilename)
         let settingString = String(data: try file.read(), encoding: .utf8)
         
