@@ -38,7 +38,7 @@ extension TopicSummary: MarkdownConvertible {
         
         
         let content = MarkdownTable(headers: ["Date", "Title"], data: listOfTils).markdown
-        let summary = MarkdownStyledText(text: "\(name) (\(tils.count))", style: .bold).markdown
+        let summary = "\(name) (\(tils.count))"
         return MarkdownCollapsibleSection(summary: summary, details: content).markdown
     }
 }
