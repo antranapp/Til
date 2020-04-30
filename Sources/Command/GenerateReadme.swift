@@ -6,6 +6,7 @@ import Foundation
 import ArgumentParser
 import ShellOut
 import Files
+import ColorizeSwift
 
 /// A command to genreate a summary `README.md` based on the content in a `RootFolder`
 ///
@@ -38,7 +39,9 @@ struct GenerateReadme: ParsableCommand {
     
     func run() throws {
         let service = try ReadmeGenerationService(rootFolder: rootContentFolder)
-        try service.generate()
+        let readmeFile = try service.generate()
+        
+        print("REAMDE.md generated successfully at \(readmeFile.path)!".green())
     }
     
     // MARK: - Private Helpers

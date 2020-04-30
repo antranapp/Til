@@ -32,13 +32,15 @@ class ReadmeGenerationService {
     
     // MARK: APIs
     
-    func generate() throws {
+    func generate() throws -> File {
         let contentSummary = makeContentSummary()
         
-        let content = header + String.newLine +
+        let content = header + String.newLine.x(2) +
                       contentSummary.markdown
         
         try file.write(content)
+        
+        return file
     }
     
     // MARK: Private helpers
@@ -53,7 +55,7 @@ class ReadmeGenerationService {
                 numberOfTIL: $0.files.count(),
                 tils: $0.files.map {
                     TILSummary(
-                        title: $0.name,
+                        title: $0.name, // TODO: read title of a TIL from file
                         createdAt: $0.creationDate
                     )
                 }

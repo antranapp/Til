@@ -23,5 +23,9 @@ extension String {
         return self.data(using: .utf8)
     }
     
+    func x(_ times:Int) -> String {
+        return String(repeating: self, count: times)
+    }
+    
     static var newLine: String = "\n"
 }
