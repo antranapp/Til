@@ -78,7 +78,7 @@ class ReadmeGenerationService {
     }
     
     private var tilReference: String {
-        var content = MarkdownHeader(title: "Til Reference", level: .h1).markdown
+        var content = "---\n" + MarkdownHeader(title: "Til Reference", level: .h1).markdown
         if let help = try? shellOut(to: "Til -h") {
             content += String.newLine.x(2) + MarkdownCodeBlock(code: help, style: .backticks(language: "bash")).markdown
         }

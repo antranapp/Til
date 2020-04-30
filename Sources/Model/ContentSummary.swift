@@ -13,7 +13,7 @@ struct TilSummary {
 
 extension TilSummary: MarkdownConvertible {
     var markdown: String {
-        "\(tilEntry.meta.createdAt?.asYYYYMMDD ?? ""): \(tilEntry.meta.title)".trimmed
+        tilEntry.meta.title.trimmed
     }
 }
 
@@ -26,18 +26,20 @@ struct TopicSummary {
 
 extension TopicSummary: MarkdownConvertible {
     var markdown: String {
-        let listOfTILs = MarkdownList(
-            items: tils.map {
-                MarkdownLink(
-                    text: $0.markdown,
-                    url: $0.tilEntry.file.path(
-                        relativeTo: SettingsManager.shared.rootContentFolder!
-                    )
+        let listOfTils = tils.map {[
+            $0.tilEntry.meta.createdAt?.asYYYYMMDD ?? "",
+            MarkdownLink(
+                text: $0.markdown,
+                url: $0.tilEntry.file.path(
+                    relativeTo: SettingsManager.shared.rootContentFolder!
                 )
-            }
-        )
-        let summary = "\(name) (\(tils.count))"
-        return MarkdownCollapsibleSection(summary: summary, details: listOfTILs.markdown).markdown
+            ).markdown
+        ]}
+        
+        
+        let content = MarkdownTable(headers: ["Date", "Title"], data: listOfTils).markdown
+        let summary = MarkdownStyledText(text: "\(name) (\(tils.count))", style: .bold).markdown
+        return MarkdownCollapsibleSection(summary: summary, details: content).markdown
     }
 }
 
