@@ -46,10 +46,24 @@ class ReadmeGenerationService {
     private func makeContentSummary() -> ContentSummary {
         let numberOfTopics = rootFolder.subfolders.count()
         let numberOfTILs = rootFolder.subfolders.reduce(0) { $0 + $1.files.count()}
+        
+        let topics = rootFolder.subfolders.map {
+            TopicSummary(
+                name: $0.name,
+                numberOfTIL: $0.files.count(),
+                tils: $0.files.map {
+                    TILSummary(
+                        title: $0.name,
+                        createdAt: $0.creationDate
+                    )
+                }
+            )
+        }
+        
         return ContentSummary(
             numberOfTILs: numberOfTILs,
             numberOfTopics: numberOfTopics,
-            topics: nil
+            topics: topics
         )
     }
     
