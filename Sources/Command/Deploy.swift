@@ -25,23 +25,17 @@ extension Til {
         // MARK: APIs
 
         func run() throws {
-            print(try shellOut(to: .gitPull()))            
-            print("[Info] Pull from remote repository successfully!".green())
+            print(try shellOut(to: .gitPull()))
+            print("[Info] Pull from the remote repository successfully!".green())
             
             print(try shellOut(to: .tilGenerateReadme()))
             
-            print(try shellOut(to: .gitCommit(message: "Update \(Date().asYYYYMMDD)")))
+            let message = "Update \(Date().asYYYYMMDD)"
+            print(try shellOut(to: .gitCommit(message: message)))
+            print("[Info] Commit changes succesfully with message: \(message)".green())
             
             print(try shellOut(to: .gitPush()))
+            print("[Info] Push to the remote repository successfully!".green())
         }
-    }
-}
-
-
-extension ShellOutCommand {
-    
-    /// Calling generate-readme command
-    static func tilGenerateReadme() -> ShellOutCommand {
-        return ShellOutCommand(string: "Til generate-readme")
     }
 }

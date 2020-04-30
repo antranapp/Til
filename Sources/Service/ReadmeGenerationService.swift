@@ -6,6 +6,7 @@ import Foundation
 import Files
 import MarkdownGenerator
 import Ink
+import ShellOut
 
 /// Service class to generate a `README.md` file based on the content inside a `rootFolder`.
 class ReadmeGenerationService {
@@ -37,8 +38,8 @@ class ReadmeGenerationService {
         let contentSummary = makeContentSummary()
         
         let content = header + String.newLine.x(2) +
-                      contentSummary.markdown
-        
+                      contentSummary.markdown + String.newLine.x(2) +
+                      tilReference + String.newLine.x(2)
         try file.write(content)
         
         return file
@@ -74,5 +75,13 @@ class ReadmeGenerationService {
     
     private var header: String {
         return MarkdownHeader(title: "Today I Learned", level: .h1).markdown
+    }
+    
+    private var tilReference: String {
+        var content = MarkdownHeader(title: "Til Reference", level: .h1).markdown
+        if let help = try? shellOut(to: "Til -h") {
+            content += String.newLine.x(2) + MarkdownCodeBlock(code: help, style: .backticks(language: "bash")).markdown
+        }
+        return content
     }
 }
