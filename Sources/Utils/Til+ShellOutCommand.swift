@@ -16,4 +16,9 @@ extension ShellOutCommand {
         let command = "Til generate-readme"
         return ShellOutCommand(string: command)
     }
+    
+    static func tilDeploy() -> ShellOutCommand {
+        let command = "Til deploy"
+        return ShellOutCommand(string: command)
+    }
 }
