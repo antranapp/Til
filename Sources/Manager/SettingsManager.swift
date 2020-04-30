@@ -4,6 +4,9 @@
 
 import Files
 import Yams
+import ColorizeSwift
+
+// TODO: changed to SingleTon
 
 /// Managing the settings for the tool.
 struct SettingsManager {
@@ -17,7 +20,7 @@ struct SettingsManager {
             
             static func makeDefaultSetting() -> Setting {
                 return Setting(
-                    root: Constants.DefaultSettings.editor,
+                    root: Constants.DefaultSettings.rootContentFolder,
                     editor: Constants.DefaultSettings.editor
                 )
             }
@@ -35,9 +38,14 @@ struct SettingsManager {
     
     // MARK: Initialization
     
-    init() throws {
-        self.rootFolder = try Folder(path: ".")
-        try load()
+    init() {
+        self.rootFolder = try! Folder(path: ".")
+        do {
+            try load()
+        } catch {
+             print("[Warning] Failed to load settings from Til.yml. Using default settings instead!".yellow())
+             setting = Constants.DefaultSettings.makeDefaultSetting()
+         }
     }
     
     // MARK: Private helpers
@@ -51,6 +59,7 @@ struct SettingsManager {
         } else {
             setting = Constants.DefaultSettings.makeDefaultSetting()
         }
+
     }
     
     private func decodeSetting(from string: String) throws -> Setting {

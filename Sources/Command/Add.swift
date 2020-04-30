@@ -35,7 +35,7 @@ struct Add: ParsableCommand {
     // Private
 
     private var settingsManager: SettingsManager {
-        let settingManager = try! SettingsManager()
+        let settingManager = SettingsManager()
         return settingManager
     }
     
