@@ -5,5 +5,5 @@
 /// A model describing the setting of the tool.
 struct Setting: Decodable {
     let root: String
-    let editor: String
+    let editor: Editor
 }

@@ -34,6 +34,9 @@ extension Til {
         @Option(name: .shortAndLong, default: nil, help: "Root folder of the content")
         private var root: String?
         
+        @Option(name: .shortAndLong, default: "console", help: "Launching the editor from a command-line tool or from a GUI app?")
+        private var launchMode: String
+        
         // Private
         
         private var rootContentFolder: Folder {
@@ -61,7 +64,13 @@ extension Til {
         
         /// Open a file at `path`using an editor.
         private func openEditor(file: File) throws {
-            try shellOut(to: "\(editorCommand) \(file.path)")
+            guard let launchMode = EditorLaunchCommand.Mode(rawValue: launchMode) else {
+                throw AddCommandError.invalidLaunchMode
+            }
+
+            let launchCommand = try editorCommandWithArguments([file.path], launchMode: launchMode)
+            print(launchCommand)
+            try shellOut(to: "\(launchCommand) \(file.path)")
         }
         
         /// Create default YAML-formatted header for the markdown file.
@@ -89,8 +98,24 @@ extension Til {
             return root ?? SettingsManager.shared.setting.root
         }
         
-        private var editorCommand: String {
-            return editor ?? SettingsManager.shared.setting.editor
+        private func editorCommandWithArguments(_ args: [String], launchMode: EditorLaunchCommand.Mode) throws -> String {
+            if let editor = editor.map({ try? Editor.fromRawValues(name: $0) }) as? Editor {
+                guard let command = editor.launchCommandWithArguments(args).command(for: launchMode) else {
+                    throw AddCommandError.noLaunchCommand
+                }
+                return command
+            }
+
+            guard let command = SettingsManager.shared.setting.editor.launchCommandWithArguments(args).command(for: launchMode) else {
+                throw AddCommandError.noLaunchCommand
+            }
+
+            return command
         }
     }
+}
+
+enum AddCommandError: Error {
+    case noLaunchCommand
+    case invalidLaunchMode
 }

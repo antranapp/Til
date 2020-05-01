@@ -16,7 +16,7 @@ class SettingsManager {
         
         struct DefaultSettings {
             static let rootContentFolder = "."
-            static let editor = "code"
+            static let editor = try! Editor.fromRawValues(name: "code")
             
             static func makeDefaultSetting() -> Setting {
                 return Setting(
