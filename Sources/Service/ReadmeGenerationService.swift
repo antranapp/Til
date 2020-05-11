@@ -55,6 +55,7 @@ class ReadmeGenerationService {
         
         let topics = rootFolder.subfolders.map {
             TopicSummary(
+                rootFolder: rootFolder,
                 name: $0.name,
                 numberOfTIL: $0.files.count(),
                 tils: $0.files.compactMap { file in

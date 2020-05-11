@@ -19,6 +19,7 @@ extension TilSummary: MarkdownConvertible {
 
 /// A meta summary of a topic.
 struct TopicSummary {
+    let rootFolder: Folder
     let name: String
     let numberOfTIL: Int
     let tils: [TilSummary]
@@ -30,9 +31,7 @@ extension TopicSummary: MarkdownConvertible {
             $0.tilEntry.meta.createdAt?.asYYYYMMDD ?? "",
             MarkdownLink(
                 text: $0.markdown,
-                url: $0.tilEntry.file.path(
-                    relativeTo: SettingsManager.shared.rootContentFolder!
-                )
+                url: "./\($0.tilEntry.file.path(relativeTo: rootFolder))"
             ).markdown
         ]}
         
