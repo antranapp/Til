@@ -3,7 +3,7 @@
 //
 
 /// A model describing the setting of the tool.
-struct Setting: Decodable {
+struct Setting: Codable {
     let root: String
     let editor: Editor
 }

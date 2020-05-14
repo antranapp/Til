@@ -52,9 +52,15 @@ You should actually try [Swift](https://swift.org/). It is a relatively easy to 
 
 ## 💪 Seriously man, how can I use it?
 
-I've just tested the tool on my Mac, but theoritically it should also work on Linux (Ubuntu). And soon you should be able to use the tool on [Windows and additinal Linux distributions](https://swift.org/blog/5-3-release-process/).
+### Requirements:
 
-Install by running the following commands:
+- MacOS
+- Visual Studio Code (including [the command line](https://code.visualstudio.com/docs/setup/mac))
+
+> I've just tested the tool on my Mac, but theoritically it should also work on Linux (Ubuntu). And soon you should be able to use the tool on [Windows and additinal Linux distributions](https://swift.org/blog/5-3-release-process/).
+
+
+### Installation:
 
 ```
 mkdir til
@@ -64,12 +70,33 @@ chmod +x release.sh
 ./release.sh
 ```
 
+You can add a `Til.yaml` to customise the settings:
+
+```yaml
+root: temp
+editor:
+  name: code
+  gui: /usr/bin/open -b com.microsoft.VSCode
+  console: code
+```
+
+Available commands:
+
+```swift
+Til add <topic> <title>
+Til generate-readme
+Til deploy
+```
+
+> I'm working on an easy setup for the tool, such as [using brew](https://medium.com/@mxcl/maintaining-a-homebrew-tap-for-swift-projects-7287ed379324)
+
 ### Til Reference
+
 
 ```bash
 OVERVIEW: A Swift command-line tool to manage a Today-I-Learned repository
 
-USAGE: til <subcommand>
+USAGE: Til <subcommand>
 
 OPTIONS:
   -h, --help              Show help information.
@@ -82,10 +109,6 @@ SUBCOMMANDS:
 
 ```
 
-
-
-> I'm working on an easy setup for the tool, such as [using brew](https://medium.com/@mxcl/maintaining-a-homebrew-tap-for-swift-projects-7287ed379324)
-
 ## 🤯 What is the future plan?
 
 Some ideas I have in mind now:
@@ -93,6 +116,9 @@ Some ideas I have in mind now:
 - A command create a static website so that we can display the tils in Github Pages and also add some Full-Text-Search to that. 
 - A command to create a PDF from a remote site and attach it to the til to preventing the information going away when the remote sites are not reachable or changed.
 
+If you have any interesting ideas, please tell me what you want to add by creating new issues or new PRs
+
+## 🍻 Resources
 There are some similar tools already existed if you want some alternatives:
 
 - An electron app: [https://github.com/seokju-na/geeks-diary](https://github.com/seokju-na/geeks-diary)
@@ -100,4 +126,3 @@ There are some similar tools already existed if you want some alternatives:
 - A VSCode extension: [https://github.com/rahuldhawani/TILed](https://github.com/rahuldhawani/TILed)
 - A Python script: [https://github.com/khanhicetea/today-i-learned](https://github.com/khanhicetea/today-i-learned)
 
-If you have any interesting ideas, please tell me what you want to add by creating new issues or new PRs

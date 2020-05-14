@@ -34,11 +34,11 @@ class SettingsManager {
     
     static let shared = SettingsManager()
     
-    public let rootFolder = try! Folder(path: ".")
+    let rootFolder = try! Folder(path: ".")
     
-    public var setting: Setting!
+    var setting: Setting!
 
-    public var rootContentFolder: Folder? {
+    var rootContentFolder: Folder? {
         return try? Folder(path: setting.root)
     }
     
@@ -48,9 +48,10 @@ class SettingsManager {
         do {
             try load()
         } catch {
-             print("[Warning] Failed to load settings from Til.yml. Using default settings instead!".yellow())
-             setting = Constants.DefaultSettings.makeDefaultSetting()
-         }
+            print(error)
+            print("[Warning] Failed to load settings from Til.yml. Using default settings instead!".yellow())
+            setting = Constants.DefaultSettings.makeDefaultSetting()
+        }
     }
     
     // MARK: Private helpers
@@ -61,14 +62,19 @@ class SettingsManager {
         
         if let settingString = settingString {
             setting = try decodeSetting(from: settingString)
-        } else {
-            setting = Constants.DefaultSettings.makeDefaultSetting()
+            return
         }
-
+        
+        throw Files.ReadError(path: file.path, reason: Files.ReadErrorReason.stringDecodingFailed)
     }
     
     private func decodeSetting(from string: String) throws -> Setting {
         let decoder = YAMLDecoder()
-        return try decoder.decode(from: string)
+        return try decoder.decode(Setting.self, from: string)
+    }
+    
+    private func encodeSetting(from setting: Setting) throws -> String {
+        let encoder = YAMLEncoder()
+        return try encoder.encode(setting)
     }
 }

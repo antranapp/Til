@@ -1,2 +1,6 @@
 root: temp
-editor: code
+editor:
+  name: code
+  gui: /usr/bin/open -b com.microsoft.VSCode
+  console: code
+

@@ -5,7 +5,7 @@
 import Foundation
 
 /// A model describing an `Editor` and its functionalities.
-enum Editor: Decodable {
+enum Editor: Codable {
 
     // MARK: Properties
     
@@ -26,6 +26,17 @@ enum Editor: Decodable {
         let consoleCommand = try values.decodeIfPresent(String.self, forKey: .console)
         
         self = try Editor.fromRawValues(name: name, launchCommand: EditorLaunchCommand(gui: guiCommand, console: consoleCommand))
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        switch self {
+            case .code(let name, let launchCommands):
+                try container.encode(name, forKey: .name)
+                try container.encode(launchCommands.gui, forKey: .gui)
+                try container.encode(launchCommands.console, forKey: .console)
+        }
     }
     
     static func fromRawValues(name: String, launchCommand: EditorLaunchCommand? = nil) throws -> Editor {
@@ -57,6 +68,7 @@ enum Editor: Decodable {
     }
 }
 
+// MARK: - EditorLaunchCommand
 
 struct EditorLaunchCommand: Decodable {
     
@@ -84,6 +96,8 @@ struct EditorLaunchCommand: Decodable {
         }
     }
 }
+
+// MARK: - EnumInitiazationError
 
 enum EnumInitiazationError: Error {
     case invalidCase
