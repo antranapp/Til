@@ -78,5 +78,6 @@ There are some similar tools already existed if you want some alternatives:
 - An electron app: [https://github.com/seokju-na/geeks-diary](https://github.com/seokju-na/geeks-diary)
 - Using Github issues for tils (👌👍): [https://github.com/tieubao/til/issues](https://github.com/tieubao/til/issues)
 - A VSCode extension: [https://github.com/rahuldhawani/TILed](https://github.com/rahuldhawani/TILed)
+- A Python script: [https://github.com/khanhicetea/today-i-learned](https://github.com/khanhicetea/today-i-learned)
 
 If you have any interesting ideas, please tell me what you want to add by creating new issues or new PRs
