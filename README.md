@@ -64,7 +64,27 @@ chmod +x release.sh
 ./release.sh
 ```
 
-I'm working on an easy setup for the tool, such as [using brew](https://medium.com/@mxcl/maintaining-a-homebrew-tap-for-swift-projects-7287ed379324)
+### Til Reference
+
+```bash
+OVERVIEW: A Swift command-line tool to manage a Today-I-Learned repository
+
+USAGE: til <subcommand>
+
+OPTIONS:
+  -h, --help              Show help information.
+
+SUBCOMMANDS:
+  add                     Add a new Today-I-Learned entry using a default
+                          MarkDown editor.
+  generate-readme         Generate a README.md from the content.
+  deploy                  Deploy the content to the remote repository.
+
+```
+
+
+
+> I'm working on an easy setup for the tool, such as [using brew](https://medium.com/@mxcl/maintaining-a-homebrew-tap-for-swift-projects-7287ed379324)
 
 ## 🤯 What is the future plan?
 
