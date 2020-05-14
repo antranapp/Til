@@ -4,13 +4,16 @@ Til is a command line tool written in `Swift` to manage a `Today-I-Learned` repo
 
 ## 😯 What is a Today-I-Leanred (Til) repository?
 
-If you don't know what what "Today I Learned" is, then lmgtfy :D
+If you don't know what "Today I Learned" is, then [lmgtfy](https://www.google.com/search?q=today+i+learned)
 
-A til repository is kind a place to store things you have learned or read or stumbled upon.
+**A til repository** is a place to store things you have learned or read or stumbled upon.
 
 With a repository, you can go back in time and search for something that you know for sure you have seen before but probably can't find it again, such as in Google.
 
+Using public git repositories to store your tils enable you to share your tils with other peers easily.
+
 This movement has been adopted also by many organisations to provide a bite size information to their audiences, such as:
+
 - [National Geographic TIL](https://video.nationalgeographic.com/video/til)
 - [Reddit](https://www.reddit.com/r/todayilearned/)
 - ...
@@ -46,6 +49,22 @@ The command line tool can basically:
 Sorry, I'm [iOS developer](https://antran.app).
 
 You should actually try [Swift](https://swift.org/). It is a relatively easy to learn and powerful programming language.
+
+## 💪 Seriously man, how I can use it?
+
+I've just tested the tool on my Mac, but theoritically it should also work on Linux (Ubuntu). And soon you should be able to use the tool on [Windows and additinal Linux distributions](https://swift.org/blog/5-3-release-process/).
+
+Install by running the following commands:
+
+```
+mkdir til
+git checkout https://github.com/antranapp/Til.git
+cd Til
+chmod +x release.sh
+./release.sh
+```
+
+I'm working on an easy setup for the tool, such as [using brew](https://medium.com/@mxcl/maintaining-a-homebrew-tap-for-swift-projects-7287ed379324)
 
 ## 🤯 What is the future plan?
 
