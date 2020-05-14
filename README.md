@@ -40,9 +40,9 @@ So I have started to build a command-line tool to help me managing this TIL resp
 
 The command line tool can basically:
 
-- Add a new topic, create a markdown file with some pre-filled meta data and open a markdown editor for you to add information
-- Generate a README.md by aggregating all Tils in the repo and list them in a table view organized by topics.
-- Deploy all changes to the remote repository.
+- **Add a new topic**: create a markdown file with some pre-filled meta data and open a markdown editor for you to add information
+- **Generate a README.md** by aggregating all Tils in the repo and list them in a table view organized by topics.
+- **Deploy** all changes to the remote repository.
 
 ## 😭 Oh no, why Swift?
 
@@ -50,7 +50,7 @@ Sorry, I'm [iOS developer](https://antran.app).
 
 You should actually try [Swift](https://swift.org/). It is a relatively easy to learn and powerful programming language.
 
-## 💪 Seriously man, how I can use it?
+## 💪 Seriously man, how can I use it?
 
 I've just tested the tool on my Mac, but theoritically it should also work on Linux (Ubuntu). And soon you should be able to use the tool on [Windows and additinal Linux distributions](https://swift.org/blog/5-3-release-process/).
 
