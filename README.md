@@ -48,7 +48,7 @@ The command line tool can basically:
 
 Sorry, I'm [iOS developer](https://antran.app).
 
-You should actually try [Swift](https://swift.org/). It is a relatively easy to learn and powerful programming language.
+You should actually try! [Swift](https://swift.org/). It is a relatively easy to learn and powerful programming language.
 
 ## 💪 Seriously man, how can I use it?
 
