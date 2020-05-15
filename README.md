@@ -125,4 +125,5 @@ There are some similar tools already existed if you want some alternatives:
 - Using Github issues for tils (👌👍): [https://github.com/tieubao/til/issues](https://github.com/tieubao/til/issues)
 - A VSCode extension: [https://github.com/rahuldhawani/TILed](https://github.com/rahuldhawani/TILed)
 - A Python script: [https://github.com/khanhicetea/today-i-learned](https://github.com/khanhicetea/today-i-learned)
-
+- Tilex - Today I Learned in Elixir: [https://github.com/hashrocket/tilex](https://github.com/hashrocket/tilex)
+- Using VuePress: [https://github.com/MarcLoupias/memo-dev](https://github.com/MarcLoupias/memo-dev)
