@@ -24,8 +24,6 @@ In Software development, we collect over the time so many code snippet, tips, tr
 
 It's also not so easy to share such information with others if you only save them locally on your computers.
 
-## 😲 I'm sold, so what is this tool?
-
 I've accidently found[ this discussion in Hacker News](https://news.ycombinator.com/item?id=22908044) about a guy who have been managing [his TIL repository](https://github.com/jbranchaud/til) for over 5 years
 
 His TIL repository is full of interesting and useful information.
@@ -37,6 +35,8 @@ I'm totally convinced by the idea and also starting to create [a TIL repository 
 But after some days, I find it is hard to mange it, and also to find the snippet that I'm looking for again.
 
 So I have started to build a command-line tool to help me managing this TIL respository more easily.
+
+## 😲 I'm sold, so what is this tool?
 
 The command line tool can basically:
 
