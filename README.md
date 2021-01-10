@@ -115,6 +115,7 @@ Some ideas I have in mind now:
 
 - A command create a static website so that we can display the tils in Github Pages and also add some Full-Text-Search to that. 
 - A command to create a PDF from a remote site and attach it to the til to preventing the information going away when the remote sites are not reachable or changed.
+- Automatic summarize remote data sources.
 
 If you have any interesting ideas, please tell me what you want to add by creating new issues or new PRs
 
